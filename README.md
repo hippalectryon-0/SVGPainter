@@ -65,7 +65,7 @@ You can create your own shapes. A shape is a class that contains two functions, 
  The shape is determined by its parametric curve `MyShape().curve(t)`. 
  The `draw` function uses a `CurveDrawer` instance passed as an argument `drawer` by the `scene` to draw itself between `tmin` and `tmax` with `steps` steps.
 
-### CurveDrawer()
+## CurveDrawer()
 This is the class that handles the drawings and the mouse movements. **By default, you won't have to manipulate this class directly, all the work is done via the `Scene` object.**
 
 It needs to be initialized through `CurveDrawer().init(sX,sY,xmin,ymin)` defining the box in which it can draw, of size `sX,sY` located at `xmin,ymin` from the top left corner.
