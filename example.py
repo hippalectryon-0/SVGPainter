@@ -1,7 +1,7 @@
 ## Paint an SVG
 from SVGPainter import drawSvg
 drawSvg(650, 800, 613+10, 83+20+100*1,'C://Users//Hippa//Documents//GitHub//SVGPainter//test.svg',flip_svg=False)
-err()
+
 ## Create a custom Scene and draw items
 from SVGPainter import Scene, Line, RegPol, Rectangle
 scene=Scene()
