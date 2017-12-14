@@ -19,7 +19,6 @@ def click(x,y):
     m_up()
     
 ## Maths
-
 def Heaveside(x): # Heaveside that's 1/2 for x=0
     if x==0: return .5
     return 0 if x<0 else 1
