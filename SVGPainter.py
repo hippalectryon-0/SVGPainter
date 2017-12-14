@@ -76,11 +76,10 @@ class CurveDrawer():
 		m_move(x,y)
 		m_down()
 		for t in linspace(tmin,tmax,steps):
-			sleep(wait_time)
 			pos=curve(t);x,y=pos[0],pos[1]
 			x,y=int(self.xmin+max(0,min(x,self.sX))),int(self.ymin+max(0,min(y,self.sY)))
 			m_move(x,y)
-			m_down()
+			sleep(wait_time)
 		self.prev_curs_pos=array([x,y])
 		
 ## Geometric shapes
@@ -101,7 +100,7 @@ class RegPol(): # Regular Polygon
 		drawer.draw(self.curve,0,1,self.n_sides+1)
 
 class Line():
-	def __init__(self,start,end,nP=2):
+	def __init__(self,start,end,nP=3):
 		self.start=array(start)
 		self.end=array(end)
 		self.nP=nP
@@ -182,7 +181,7 @@ def drawSvg(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False):
 	"""
 	paths, attributes, svg_attributes = svgpathtools.svg2paths2(name)
 	svg_w,svg_h=int(float(svg_attributes['width'].replace('px','').replace('pt',''))),int(float(svg_attributes['height'].replace('px','').replace('pt','')))
-	#svg_w,svg_h=8000,7500 # may have to tweak those manually
+	#svg_w,svg_h=1800,3000 # may have to tweak those manually
 	factX,factY=sX/svg_w,sY/svg_h
 	
 	scene=Scene()
@@ -205,7 +204,7 @@ def drawSvg(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False):
 			if type(elt) is svgpathtools.Line:
 				scene.add(Line([elt.start.real*factX,elt.start.imag*factY],[elt.end.real*factX,elt.end.imag*factY],4))
 			elif type(elt) is svgpathtools.CubicBezier:
-				scene.add(CubicBezier([elt.start.real*factX,elt.start.imag*factY],[elt.end.real*factX,elt.end.imag*factY],[elt.control1.real*factX,elt.control1.imag*factY],[elt.control2.real*factX,elt.control2.imag*factY],3))
+				scene.add(CubicBezier([elt.start.real*factX,elt.start.imag*factY],[elt.end.real*factX,elt.end.imag*factY],[elt.control1.real*factX,elt.control1.imag*factY],[elt.control2.real*factX,elt.control2.imag*factY],4))
 			elif type(elt) is svgpathtools.Arc:
 				continue # Not implemented yet
 			else:
