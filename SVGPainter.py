@@ -181,7 +181,7 @@ def drawSvg(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False,auto_resize=True):
 	auto_resize: sometimes the broadcasted size of the SVG doesn't correspond to the coordinates of its geometry. This parameter auto resizes the image to its best fitting box +1%width/height if True
 	"""
 	paths, attributes, svg_attributes = svgpathtools.svg2paths2(name)
-	svg_w,svg_h=ceil(float(svg_attributes['width'].replace('px','').replace('pt',''))),ceil(float(svg_attributes['height'].replace('px','').replace('pt','')))
+	svg_w,svg_h=ceil(float(svg_attributes['width'].replace('px','').replace('pt','').replace('mm',''))),ceil(float(svg_attributes['height'].replace('px','').replace('pt','').replace('mm',''))) # Fix later
 	if auto_resize:
 		for i in range(len(paths)):
 			path,attrib=paths[i],attributes[i]
