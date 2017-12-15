@@ -47,7 +47,7 @@ class CurveDrawer():
 		self.xmin=xmin
 		self.ymin=ymin
 	
-	def draw(self,curve,tmin,tmax,steps=2,wait_time=1/60.):
+	def draw(self,curve,tmin,tmax,steps=2,wait_time=1/500.):
 		"""
 		draws the curve given by moving the mouse down at each curve(t) for tmin<=t<=tmax with `steps` steps. The pause between each step is `wait_time`
 		the mouse state is NOT restored up in the end
@@ -154,7 +154,7 @@ class CubicBezier():
 ## Scene to draw
 class Scene():
 	def __init__(self,elts=[]):
-		self.elts=elts
+		self.elts=list(elts)
 		self.drawer=CurveDrawer()
 	
 	def add(self,elt):
@@ -169,6 +169,7 @@ class Scene():
 		xmin,ymin: top left corner of the window to draw in
 		"""
 		self.drawer.initFrame(sX,sY,xmin,ymin)
+		print('----------',len(self.elts))
 		for elt in self.elts:
 			elt.draw(self.drawer)
 		m_up()
@@ -178,7 +179,7 @@ def drawSvg(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False,auto_resize=True):
 	Draws the svg `name`, with a bounding box if `bbox`, flipped if `flip_svg`
 	sX,sY: size (pixels) of the windows in which to draw
 	xmin,ymin: top left corner of the window to draw in
-	auto_resize: sometimes the broadcasted size of the SVG doesn't correspond to the coordinates of its geometry. This parameter auto resizes the image to its best fitting box +5%width/height if True
+	auto_resize: sometimes the broadcasted size of the SVG doesn't correspond to the coordinates of its geometry. This parameter auto resizes the image to its best fitting box +1%width/height if True
 	"""
 	paths, attributes, svg_attributes = svgpathtools.svg2paths2(name)
 	svg_w,svg_h=ceil(float(svg_attributes['width'].replace('px','').replace('pt',''))),ceil(float(svg_attributes['height'].replace('px','').replace('pt','')))
@@ -189,7 +190,7 @@ def drawSvg(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False,auto_resize=True):
 				for t in linspace(0,1,5):
 					pt=elt.point(t)
 					svg_w,svg_h=max(svg_w,pt.real),max(svg_h,pt.imag)
-		svg_w,svg_h=ceil(svg_w*1.05),ceil(svg_h*1.05)
+		svg_w,svg_h=ceil(svg_w*1.01),ceil(svg_h*1.01)
 	factX,factY=sX/svg_w,sY/svg_h
 	
 	scene=Scene()
