@@ -1,6 +1,6 @@
 from time import sleep # pause the program
 import win32api, win32con # simulate mouse presses and listen to mouse events
-from numpy import linspace,array,cos,sin,pi,arcsin,arccos,arctan,array_equal,sqrt # maths
+from numpy import linspace,array,cos,sin,pi,arcsin,arccos,arctan,array_equal,sqrt,ceil # maths
 import svgpathtools # convert SVG to paths
 
 ## Mouse handling
@@ -173,15 +173,23 @@ class Scene():
 			elt.draw(self.drawer)
 		m_up()
 
-def drawSvg(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False):
+def drawSvg(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False,auto_resize=True):
 	"""
 	Draws the svg `name`, with a bounding box if `bbox`, flipped if `flip_svg`
 	sX,sY: size (pixels) of the windows in which to draw
 	xmin,ymin: top left corner of the window to draw in
+	auto_resize: sometimes the broadcasted size of the SVG doesn't correspond to the coordinates of its geometry. This parameter auto resizes the image to its best fitting box +5%width/height if True
 	"""
 	paths, attributes, svg_attributes = svgpathtools.svg2paths2(name)
-	svg_w,svg_h=int(float(svg_attributes['width'].replace('px','').replace('pt',''))),int(float(svg_attributes['height'].replace('px','').replace('pt','')))
-	#svg_w,svg_h=1800,3000 # may have to tweak those manually
+	svg_w,svg_h=ceil(float(svg_attributes['width'].replace('px','').replace('pt',''))),ceil(float(svg_attributes['height'].replace('px','').replace('pt','')))
+	if auto_resize:
+		for i in range(len(paths)):
+			path,attrib=paths[i],attributes[i]
+			for elt in path:
+				for t in linspace(0,1,5):
+					pt=elt.point(t)
+					svg_w,svg_h=max(svg_w,pt.real),max(svg_h,pt.imag)
+		svg_w,svg_h=ceil(svg_w*1.05),ceil(svg_h*1.05)
 	factX,factY=sX/svg_w,sY/svg_h
 	
 	scene=Scene()
@@ -202,7 +210,7 @@ def drawSvg(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False):
 			if flip_svg:
 				elt=flip(elt)
 			if type(elt) is svgpathtools.Line:
-				scene.add(Line([elt.start.real*factX,elt.start.imag*factY],[elt.end.real*factX,elt.end.imag*factY],4))
+				scene.add(Line([elt.start.real*factX,elt.start.imag*factY],[elt.end.real*factX,elt.end.imag*factY],3))
 			elif type(elt) is svgpathtools.CubicBezier:
 				scene.add(CubicBezier([elt.start.real*factX,elt.start.imag*factY],[elt.end.real*factX,elt.end.imag*factY],[elt.control1.real*factX,elt.control1.imag*factY],[elt.control2.real*factX,elt.control2.imag*factY],4))
 			elif type(elt) is svgpathtools.Arc:

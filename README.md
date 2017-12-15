@@ -23,10 +23,11 @@ Several shapes are builtin and can be imported: `Rectangle,Line,RegPol,Bezier,Cu
 
 Documentation
 -------------
-## drawSVG(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False)
+## drawSVG(sX,sY,xmin,ymin,name,bbox=True,flip_svg=False,auto_resize=True)
 Draws the SVG file located at `name` in a box of size `sX,sY` located at `xmin,ymin` from the top left corner.
 *bbox* ("bounding box"): if True, draws a rectangle indicating the scene's box
 *flip_svg*: if True, flip the SVG vertically (SVGs are sometime encoded flipped)
+*auto_resize*: instead of using the width and height provided by the SVG file, which can be misleading, automatically finds the best width and height (+5%) including all the shapes in the image
 
 ## Scene(elts=[])
 A `Scene` is a container for the shapes to draw.
