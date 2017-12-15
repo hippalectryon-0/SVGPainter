@@ -42,7 +42,9 @@ Once a scene is created, shapes can be added via the `add` function:
     scene.add(shape)
   
 Finally, the scene can be drawn on a given box of size `sX,sY` located at `xmin,ymin` from the top left corner using the `draw` function:
+
  `scene.draw(sX,sY,xmin,ymin)`
+ 
  All the coordinates of the shapes are relative to the drawing box.
 
 ## Shapes
@@ -66,8 +68,10 @@ You can create your own shapes. A shape is a class that contains two functions, 
     		return foo(t)
     	def draw(self,drawer):
     		drawer.draw(self.curve,tmin,tmax,steps)
- The shape is determined by its parametric curve `MyShape().curve(t)`. 
- The `draw` function uses a `CurveDrawer` instance passed as an argument `drawer` by the `scene` to draw itself between `tmin` and `tmax` with `steps` steps.
+
+The shape is determined by its parametric curve `MyShape().curve(t)`. 
+ 
+The `draw` function uses a `CurveDrawer` instance passed as an argument `drawer` by the `scene` to draw itself between `tmin` and `tmax` with `steps` steps.
 
 ## CurveDrawer()
 This is the class that handles the drawings and the mouse movements. **By default, you won't have to manipulate this class directly, all the work is done via the `Scene` object.**
