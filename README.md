@@ -21,6 +21,8 @@ Painting custom shapes is done by creating a `Scene` , adding elements to that S
 
 Several shapes are builtin and can be imported: `Rectangle,Line,RegPol,Bezier,CubicBezier`
 
+Drawings can be paused/resumed by clicking MB3 (scroll wheel usually).
+
 Dependencies
 -------------
 * numpy (tested on 1.13.3)
