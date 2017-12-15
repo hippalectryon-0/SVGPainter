@@ -169,7 +169,6 @@ class Scene():
 		xmin,ymin: top left corner of the window to draw in
 		"""
 		self.drawer.initFrame(sX,sY,xmin,ymin)
-		print('----------',len(self.elts))
 		for elt in self.elts:
 			elt.draw(self.drawer)
 		m_up()
