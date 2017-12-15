@@ -1,7 +1,7 @@
 SVGPainter
 ===================
 SVGPainter allows you to draw SVG or custom shapes on programs such as Paint.
-Only tested on Windows10.
+Only tested on Windows10 with python 3.6.3
 
 How to use
 -------------
@@ -20,6 +20,12 @@ Painting custom shapes is done by creating a `Scene` , adding elements to that S
     scene.draw(650,800,620,200)
 
 Several shapes are builtin and can be imported: `Rectangle,Line,RegPol,Bezier,CubicBezier`
+
+Dependencies
+-------------
+* numpy (tested on 1.13.3)
+* win32api, win32con
+* svgpathtools (https://github.com/mathandy/svgpathtools)
 
 Documentation
 -------------
