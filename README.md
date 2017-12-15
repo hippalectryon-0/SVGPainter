@@ -16,7 +16,7 @@ Painting custom shapes is done by creating a `Scene` , adding elements to that S
 
     from SVGPainter import Scene, Rectangle
     scene=Scene()
-    scene.add(Rectangle([100,450],(200,650)))
+    scene.add(Rectangle([100,450],[200,650]))
     scene.draw(650,800,620,200)
 
 Several shapes are builtin and can be imported: `Rectangle,Line,RegPol,Bezier,CubicBezier`
