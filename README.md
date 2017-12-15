@@ -10,7 +10,7 @@ All the required functions are in `SVGPainter.py`. Examples are given in `exampl
 Painting an SVG is done via the `drawSVG` function:
 
     from SVGPainter import drawSvg
-    drawSvg(sX,sY,xmin,ymin,filepath,bbox=True,flip_svg=True)
+    drawSvg(sX,sY,xmin,ymin,filepath,bbox=True,flip_svg=True,auto_resize=True)
 ## Painting custom shapes
 Painting custom shapes is done by creating a `Scene` , adding elements to that Scene, then drawing it:
 
